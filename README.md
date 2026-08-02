@@ -37,17 +37,16 @@ Bootstrap `vcpkg`:
 vendor\vcpkg\bootstrap-vcpkg.bat
 ```
 
-Configure the project:
+Configure the project using the provided CMake preset:
 
 ```bash
-cmake -S . -B build ^
-  -DCMAKE_TOOLCHAIN_FILE=vendor/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --preset base
 ```
 
-Build:
+Build the Release configuration:
 
 ```bash
-cmake --build build --config Release
+cmake --build --preset release
 ```
 
 ## Usage
@@ -83,6 +82,10 @@ RegDiff compare before.json after.json
 ```
 
 Run `RegDiff --help` for the full command-line reference.
+
+## Continuous Integration
+
+A GitHub Actions workflow is included to build RegDiff using the same CMake presets used for local development.
 
 ## Status
 
