@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: windows-2022
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Bootstrap vcpkg
+        run: .\vendor\vcpkg\bootstrap-vcpkg.bat
+
+      - name: Configure
+        run: cmake --preset base
+
+      - name: Build
+        run: cmake --build --preset release
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RegDiff
+          path: build/**/Release/RegDiff.exe
+
+      - name: Create ZIP
+        run: |
+          New-Item -ItemType Directory -Force package
+          Copy-Item build/**/Release/RegDiff.exe package/RegDiff.exe
+          Compress-Archive package/* RegDiff-${{ github.ref_name || 'manual' }}.zip
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: RegDiff-${{ github.ref_name }}.zip
