@@ -21,6 +21,12 @@ I originally put this together in about a day to troubleshoot Registry changes b
 - Export a human-readable comparison report
 - Graphical and command-line interfaces
 
+## Downloads
+
+Pre-built binaries are available from the repository's **Releases** page.
+
+If you prefer, you can also build RegDiff from source by following the instructions below.
+
 ## Building
 
 ### Requirements
@@ -85,7 +91,7 @@ Run `RegDiff --help` for the full command-line reference.
 
 ## Continuous Integration
 
-A GitHub Actions workflow is included to build RegDiff using the same CMake presets used for local development.
+A GitHub Actions workflow is included to build RegDiff from source using the same CMake presets used for local development. Release builds are published to the repository's **Releases** page.
 
 ## Status
 
