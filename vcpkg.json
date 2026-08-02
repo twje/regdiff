@@ -1,0 +1,21 @@
+{
+  "name": "regdiff",
+  "version-string": "0.2.0",
+  "description": "A read-only Windows Registry snapshot and comparison tool.",
+  "license": "MIT",
+  "dependencies": [
+    "cli11",
+    "gtest",
+    "nlohmann-json",
+    "opengl",
+    "glfw3",
+    {
+      "name": "imgui",
+      "default-features": false,
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    }
+  ]
+}
